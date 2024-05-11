@@ -113,7 +113,6 @@ if(isset($_POST['addnewbayar'])){
     $ambilidadmin = $idadmin['idadmin'];
     
     $addtotabletransaksi = mysqli_query($conn, "insert into data_transaksi (ID_Pembayaran, ID_Admin, ID_Penyewa, Tanggal_Bayar, Keterangan) values('$idpembayaran', '$ambilidadmin', '$idpenyewa', '$tanggalbayar', 'Belum Bayar')");
-    
 }
 
 if(isset($_POST['addnewtagihan'])){     
@@ -214,7 +213,6 @@ if(isset($_POST['addnewadmin'])){
     $passwordadmin=$_POST['password'];
     $lvladmin=$_POST['statusadmin'];
     $addtotableadmin = mysqli_query($conn, "insert into login (ID_Admin, Nama_Admin, Email, Password, lvl) values('$idadmin', '$namaadmin', '$emailadmin', '$passwordadmin', '$lvladmin')");
-    
 }
 
 //update atau edit info penyewa
