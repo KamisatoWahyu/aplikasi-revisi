@@ -124,45 +124,45 @@ require 'cek.php';
                                 </button>
 
                                 <div class="modal fade" id="filter">
-                                                    <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                    
-                                                        <!-- Modal Header -->
-                                                        <div class="modal-header">
-                                                        <h4 class="modal-title">Filter berdasarkan penyewa</h4>
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                        </div>
-                                                        
-                                                        <!-- Modal body -->
-                                                        <form method="post">
-                                                            <div class="modal-body">
-                                                            <label>Pilih nama penyewa yang ingin ditampilkan</label>
-                                                            
-                                                            <br>
-                                                            <select name="filterid" class="form-control">
-                                                            <option value="pilih" selected>----PILIH PENYEWA----</option>
-                                                            <?php
-                                                            $cekpenyewa = mysqli_query($conn, "SELECT Nama_Penyewa, ID_Penyewa from data_penyewa");
-                                                            while($ambilpenyewa=mysqli_fetch_array($cekpenyewa)){
-                                                                $id_penyewa=$ambilpenyewa['ID_Penyewa'];
-                                                                $nama_penyewa=$ambilpenyewa['Nama_Penyewa'];
-                                                            ?>
-                                                            <option value="<?=$id_penyewa;?>"><?=$nama_penyewa;?></option>
-                                                                
-                                                                <?php   
-                                                                    }
-                                                                ?>
-                                                                </select>
-                                                            <br>
-                            
-                                                                <button type="submit" class="btn btn-danger" name="filter">Filter</button>
-                                                                <button type="submit" class="btn btn-danger" name="hapusfilter">Hapus Filter</button>
-                                                            </div>
-                                                        </form> 
-                                                                                            
-                                                    </div>
-                                                    </div>
-                                                </div>
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                        <h4 class="modal-title">Filter berdasarkan penyewa</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        
+                                        <!-- Modal body -->
+                                        <form method="post">
+                                            <div class="modal-body">
+                                            <label>Pilih nama penyewa yang ingin ditampilkan</label>
+                                            
+                                            <br>
+                                            <select name="filterid" class="form-control">
+                                            <option value="pilih" selected>----PILIH PENYEWA----</option>
+                                            <?php
+                                            $cekpenyewa = mysqli_query($conn, "SELECT Nama_Penyewa, ID_Penyewa from data_penyewa");
+                                            while($ambilpenyewa=mysqli_fetch_array($cekpenyewa)){
+                                                $id_penyewa=$ambilpenyewa['ID_Penyewa'];
+                                                $nama_penyewa=$ambilpenyewa['Nama_Penyewa'];
+                                            ?>
+                                            <option value="<?=$id_penyewa;?>"><?=$nama_penyewa;?></option>
+                                                
+                                                <?php   
+                                                    }
+                                                ?>
+                                                </select>
+                                            <br>
+            
+                                                <button type="submit" class="btn btn-danger" name="filter">Filter</button>
+                                                <button type="submit" class="btn btn-danger" name="hapusfilter">Hapus Filter</button>
+                                            </div>
+                                        </form> 
+                                                                            
+                                    </div>
+                                    </div>
+                                </div>
                             </div>
                             
                         
