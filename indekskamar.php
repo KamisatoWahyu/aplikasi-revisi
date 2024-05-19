@@ -147,7 +147,7 @@ require 'cek.php';
                                             $jeniskamar = $data['Jenis_Kamar'];
                                             $jumlahfasilitas = $data['Jumlah_Fasilitas'];
                                             $biaya = $data['Biaya'];
-                                            $status = $data['status'];
+                                            $status = $data['Status'];
                                         ?>
                                             <tr>
                                                 <td><?=$idkamar?></td>
@@ -190,7 +190,8 @@ require 'cek.php';
                                                                 <br>
                                                                 <input type="text" name="jumlahfasilitas" value="<?=$jumlahfasilitas;?>" class="form-control" required>
                                                                 <br>
-                                                                <input type="text" name="biaya" value="<?=$biaya;?>" class="form-control" <?php if($lvladmin=='owner') { ?> required <?php }else{ ?> readonly <?php } ?>>
+                                                                <input type="text" name="biaya" value="<?=$biaya;?>" class="form-control" <?php if($lvladmin=='
+                                                                ') { ?> required <?php }else{ ?> readonly <?php } ?>>
                                                                 <br>
                                                                 <input type="hidden" name="idkamar" value="<?=$idkamar;?>">
                                                                 <button type="submit" class="btn btn-warning" name="updatekamar">Edit</button>
