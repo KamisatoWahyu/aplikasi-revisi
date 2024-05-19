@@ -39,7 +39,7 @@ if(isset($_POST['addnewpenyewa'])){
     values('$idpenyewa', '$idkamar', '$nama_penyewa', '$nomor_handphone','$alamat_rumah', '$nik', '$tanggal_masuk')");
     
     //mengubah status kamar menjadi penuh
-    $updatestatuskamar = mysqli_query($conn, "update data_kamar set status= 'Penuh' where ID_Kamar = '$idkamar'");
+    $updatestatuskamar = mysqli_query($conn, "update data_kamar set Status= 'Penuh' where ID_Kamar = '$idkamar'");
     $querytagihan = mysqli_query($conn, "SELECT max(ID_Tagihan) as id_terbesar FROM tagihan");
     
     //menambah langsung tagihan baru
@@ -91,7 +91,7 @@ if(isset($_POST['addnewkamar'])){
     $jumlah_fasilitas = $_POST['jumlah_fasilitas'];
     $biaya = $_POST['biaya'];
 
-    $addtotable = mysqli_query($conn, "insert into data_kamar (ID_Kamar, No_Kamar, Jenis_Kamar, Jumlah_Fasilitas, Biaya, status) values('$idkamar', '$nomor_kamar', '$jenis_kamar', '$jumlah_fasilitas', '$biaya', 'Kosong')");
+    $addtotable = mysqli_query($conn, "insert into data_kamar (ID_Kamar, No_Kamar, Jenis_Kamar, Jumlah_Fasilitas, Biaya, Status) values('$idkamar', '$nomor_kamar', '$jenis_kamar', '$jumlah_fasilitas', '$biaya', 'Kosong')");
 }
 
 //menambah data pembayaran baru
@@ -232,7 +232,7 @@ if(isset($_POST['updatepenyewa'])){
 if(isset($_POST['hapuspenyewa'])){
     $idpenyewa = $_POST['idpenyewa'];
     $nomorkamar = $_POST['nomorkamar'];
-    $updatestatuskamar = mysqli_query($conn, "update data_kamar set status = 'Kosong' where No_Kamar = '$nomorkamar'");
+    $updatestatuskamar = mysqli_query($conn, "update data_kamar set Status = 'Kosong' where No_Kamar = '$nomorkamar'");
     $hapustransaksi = mysqli_query($conn, "delete from data_transaksi where ID_Penyewa = '$idpenyewa'");
     $hapus = mysqli_query($conn, "delete from data_penyewa where ID_Penyewa = '$idpenyewa'");
 }
