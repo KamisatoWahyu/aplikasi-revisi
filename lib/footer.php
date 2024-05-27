@@ -1,7 +1,7 @@
 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Inovasi SI dan New Technology | Wahyu Hariyadi Nurdin | 11121286</div>
+                            <div class="text-muted">Penulisan Ilmiah | Wahyu Hariyadi Nurdin | 11121286</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
