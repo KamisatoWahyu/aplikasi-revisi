@@ -1,4 +1,6 @@
-<footer class="py-4 bg-light mt-auto">
+        
+        
+        <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Penulisan Ilmiah | Wahyu Hariyadi Nurdin | 11121286</div>

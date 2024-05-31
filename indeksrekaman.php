@@ -2,24 +2,19 @@
     include 'lib/header.php';
 ?>
 
-   $namaadmin = mysqli_fetch_array($ambiladmin);
-    $ambilnamanya = $namaadmin['namaadmin'];
-    $lvladmin = $namaadmin['lvl'];
-?><?php
+<?php
     $emailadmin = $_SESSION['username'];
     $ambiladmin = mysqli_query($conn, "SELECT lvl, Nama_Admin as namaadmin FROM login Where Email = '$emailadmin'");
- 
+    $namaadmin = mysqli_fetch_array($ambiladmin);
+    $ambilnamanya = $namaadmin['namaadmin'];
+    $lvladmin = $namaadmin['lvl'];
+?>
 
 <main>
     <div class="container-fluid">
-        <br>
-        
+        <br>       
         <h1 class="mt-4">Data Transaksi</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active"></li>
-        </ol>
-        
-        
+         
         <div class="card mb-4">
             <div class="card-header">
                 <a href = "exportlaporan.php" class="btn btn-info" target="_blank">
@@ -64,8 +59,6 @@
                                 <td><?=$tgl_transaksi?></td>
                                 <td><?=$jatuhtempo?></td>
                                 <td><?=$ktr?>
-                                    
-
                             </tr>
 
                             
@@ -144,31 +137,7 @@
                         }
                         ?>
 
-                        <!-- Logout Modal -->
-                        <div class="modal fade" id="logoutmodal">
-                                    <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                        <h4 class="modal-title">Keluar</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        
-                                        <!-- Modal body -->
-                                        <form method="post">
-                                            <div class="modal-body">
-                                                            
-                                                Apakah anda yakin ingin keluar dari aplikasi?
-                                            <br>
-                                            <br>
-                                                <a href = "logout.php" class="btn btn-danger" name="keluar">Keluar</a>
-                                            </div>
-                                        </form> 
-                                                                            
-                                    </div>
-                                    </div>
-                                </div>
+
                         </tbody>
                     </table>
                 </div>
@@ -177,32 +146,6 @@
     </div>
 </main>
                 
-<!-- Buat Modal -->
-<div class="modal fade" id="buattagihan">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    
-        <!-- Modal Header -->
-        <div class="modal-header">
-        <h4 class="modal-title">Buat data tagihan</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <form method="post">
-            <div class="modal-body">
-                Apakah anda yakin ingin membuat data tagihan bulan selanjutnya?
-            <br>
-            <br>
-                <button type="submit" class="btn btn-success" name="addnewtagihan">Buat Semua Tagihan</button>
-            
-            </div>
-        </form> 
-                                            
-    </div>
-    </div>
-</div>
-
 <?php
     include 'lib/footer.php';
 ?>

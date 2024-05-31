@@ -5,9 +5,6 @@
 <main>
     <div class="container-fluid">
         <h1 class="mt-4">Data Tagihan</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active"></li>
-        </ol>
 
         <div class="card mb-4">
             <div class="card-header">
@@ -54,31 +51,7 @@
                         }
                         ?>
                             
-                            <!-- Logout Modal -->
-                            <div class="modal fade" id="logoutmodal">
-                                    <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                        <h4 class="modal-title">Keluar</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        
-                                        <!-- Modal body -->
-                                        <form method="post">
-                                            <div class="modal-body">
-                                                            
-                                                Apakah anda yakin ingin keluar dari aplikasi?
-                                            <br>
-                                            <br>
-                                                <a href = "logout.php" class="btn btn-danger" name="keluar">Keluar</a>
-                                            </div>
-                                        </form> 
-                                                                            
-                                    </div>
-                                    </div>
-                                </div>
+                        
                         </tbody>
                     </table>
                 </div>

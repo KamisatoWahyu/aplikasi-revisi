@@ -9,6 +9,7 @@
     $ambilnamanya = $namaadmin['namaadmin'];
     $lvladmin = $namaadmin['lvl'];
 ?>
+
 <main>
     <div class="container-fluid">
         <br>
@@ -28,6 +29,9 @@
         
         <div class="card mb-4">
             <div class="card-header">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buattagihansemua">
+                        Buat tagihan bulan ini
+                </button>
                 <a href = "exportlaporan.php" class="btn btn-info" target="_blank">
                         Export data
                 </a>
@@ -64,7 +68,7 @@
                                 <?php   
                                     }
                                 ?>
-                                </select>
+                            </select>
                             <br>
 
                                 <button type="submit" class="btn btn-danger" name="filter">Filter</button>
@@ -150,112 +154,86 @@
                                     Terima kasih!" class="btn btn-success" role="button" aria-disabled="true" data-toggle="tooltip" data-placement="bottom" title="Hubungi via Whatsapp" target="_blank">Whatsapp</a>
                                 </td>
                             </tr>
-
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <!-- Edit Modal -->
+        <div class="modal fade" id="edit<?=$idpembayaran;?>">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Edit data laporan</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <form method="post">
+                    <div class="modal-body">
+                        <label>Nama Penyewa</label>
+                        <input type="text" name="namapenyewa" value="<?=$namapenyewa?>" class="form-control" readonly/>
+                        <?php if($keterangan=='Belum Bayar' || $keterangan == 'Cicil') { ?>
+                        <br>
+                        <label>Tanggal Transaksi</label>
+                        <input type="date" name="tanggaltransaksi" value="<?php echo date('Y-m-d'); ?>" class="form-control" required>
+                        <br>
+                        <br>
+                        <div class="form-group">
+                            <label>Total Tagihan</label>
+                            <input type='text' class="form-control" name="tagih" id="tagih" value="<?=$sisatagihan?>" readonly/>
+                        </div>
+                        <div class="form-group">
+                            <label>Dibayar</label>
+                            <input type='number' min="1" max="<?=$sisatagihan;?>" class="form-control" name="bayar" id="bayar" placeholder="Uang pembayaran"/>
+                        <?php }else{ ?>
+                            <br>
+                            Tagihan telah dibayar lunas.
+                            <?php } ?>
+                            <br>
+                        <br>
                             
-                                    <!-- Edit Modal -->
-                                <div class="modal fade" id="edit<?=$idpembayaran;?>">
-                                    <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                        <h4 class="modal-title">Edit data laporan</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        
-                                        <!-- Modal body -->
-                                        <form method="post">
-                                            <div class="modal-body">
-                                                <label>Nama Penyewa</label>
-                                                <input type="text" name="namapenyewa" value="<?=$namapenyewa?>" class="form-control" readonly/>
-                                                <?php if($keterangan=='Belum Bayar' || $keterangan == 'Cicil') { ?>
-                                                <br>
-                                                <label>Tanggal Transaksi</label>
-                                                <input type="date" name="tanggaltransaksi" value="<?php echo date('Y-m-d'); ?>" class="form-control" required>
-                                                <br>
-                                                <br>
-                                                <div class="form-group">
-                                                    <label>Total Tagihan</label>
-                                                    <input type='text' class="form-control" name="tagih" id="tagih" value="<?=$sisatagihan?>" readonly/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Dibayar</label>
-                                                    <input type='number' min="1" max="<?=$sisatagihan;?>" class="form-control" name="bayar" id="bayar" placeholder="Uang pembayaran"/>
-                                                <?php }else{ ?>
-                                                    <br>
-                                                    Tagihan telah dibayar lunas.
-                                                    <?php } ?>
-                                                    <br>
-                                                <br>
+                        <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
+                        <button type="submit" class="btn btn-warning" name="updatelaporan">Edit</button>
+                    </div>
+                </form> 
                                                     
-                                                <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
-                                                <button type="submit" class="btn btn-warning" name="updatelaporan">Edit</button>
-                                            </div>
-                                        </form> 
-                                                                            
-                                    </div>
-                                    </div>
-                                </div>
+            </div>
+            </div>
+        </div>
 
-                                <!-- Delete Modal -->
-                                <div class="modal fade" id="delete<?=$idpembayaran;?>">
-                                    <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                        <h4 class="modal-title">Hapus data laporan</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        
-                                        <!-- Modal body -->
-                                        <form method="post">
-                                            <div class="modal-body">
-                                                Apakah anda yakin ingin menghapus data dengan nama <b><?=$namapenyewa;?></b>?
-                                                <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
-                                            <br>
-                                            <br>
-                                                <button type="submit" class="btn btn-danger" name="hapuslaporan">Hapus</button>
-                                            </div>
-                                        </form> 
-                                                                            
-                                    </div>
-                                    </div>
-                                </div>
+        <!-- Delete Modal -->
+        <div class="modal fade" id="delete<?=$idpembayaran;?>">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Hapus data laporan</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <form method="post">
+                    <div class="modal-body">
+                        Apakah anda yakin ingin menghapus data dengan nama <b><?=$namapenyewa;?></b>?
+                        <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
+                    <br>
+                    <br>
+                        <button type="submit" class="btn btn-danger" name="hapuslaporan">Hapus</button>
+                    </div>
+                </form> 
+                                                    
+            </div>
+            </div>
+        </div>
                             
                         <?php
                         }
                         ?>
 
-                        <!-- Logout Modal -->
-                        <div class="modal fade" id="logoutmodal">
-                                    <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                        <h4 class="modal-title">Keluar</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        
-                                        <!-- Modal body -->
-                                        <form method="post">
-                                            <div class="modal-body">
-                                                            
-                                                Apakah anda yakin ingin keluar dari aplikasi?
-                                            <br>
-                                            <br>
-                                                <a href = "logout.php" class="btn btn-danger" name="keluar">Keluar</a>
-                                            </div>
-                                        </form> 
-                                                                            
-                                    </div>
-                                    </div>
-                                </div>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 </main>

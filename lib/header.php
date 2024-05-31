@@ -1,7 +1,14 @@
 <?php
-require 'function.php';
+require 'config.php';
 require 'cek.php';
+
+    $emailadmin = $_SESSION['username'];
+    $ambiladmin = mysqli_query($conn, "SELECT lvl, Nama_Admin as namaadmin FROM login Where Email = '$emailadmin'");
+    $namaadmin = mysqli_fetch_array($ambiladmin);
+    $ambilnamanya = $namaadmin['namaadmin'];
+    $lvladmin = $namaadmin['lvl'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,18 +24,7 @@ require 'cek.php';
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Catatan Kost</a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-            </form>
-            <!-- Navbar-->
+            <a class="navbar-brand" href="index.html">Administrasi Kos</a>
             
         </nav>
         <div id="layoutSidenav">
@@ -41,11 +37,11 @@ require 'cek.php';
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Halaman Utama
                             </a>
-                            <a class="nav-link" href="indekspenyewa.php">
+                            <a class="nav-link" href="indeksPenyewa.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 Penyewa
                             </a>
-                            <a class="nav-link" href="indekskamar.php">
+                            <a class="nav-link" href="indeksKamar.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 Kamar
                             </a>
@@ -56,16 +52,19 @@ require 'cek.php';
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="indekstagihan.php">Laporan Tagihan</a>
-                                    <a class="nav-link" href="indekslaporan.php">Laporan Transaksi</a>
-                                    <a class="nav-link" href="indeksrekaman.php">Rekaman Transaksi</a>
+                                    <a class="nav-link" href="indeksTagihan.php">Laporan Tagihan</a>
+                                    <a class="nav-link" href="indeksTransaksi.php">Laporan Transaksi</a>
+                                    <a class="nav-link" href="indeksRekaman.php">Rekaman Transaksi</a>
                                 </nav>
                             </div>
+
                             <div class="sb-sidenav-menu-heading">Lainnya</div>
+                            <?php if($lvladmin=='owner'){ ?>
                             <a class="nav-link" href="indeksadmin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Kelola Admin
                             </a>
+                            <?php } ?>
                             <a class="nav-link" data-toggle="modal" data-target="#logoutmodal">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Logout
@@ -73,6 +72,7 @@ require 'cek.php';
                             
                         </div>
                     </div>
+
                     <div class="sb-sidenav-footer">
                         <?php
                         $emailadmin = $_SESSION['username'];
@@ -89,4 +89,31 @@ require 'cek.php';
                     </div>
                 </nav>
             </div>
+
+            <!-- Logout Modal -->
+        <div class="modal fade" id="logoutmodal">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Keluar</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <form method="post">
+                    <div class="modal-body">
+                                    
+                        Apakah anda yakin ingin keluar dari aplikasi?
+                    <br>
+                    <br>
+                        <a href = "logout.php" class="btn btn-danger" name="keluar">Keluar</a>
+                    </div>
+                </form> 
+                                                    
+            </div>
+            </div>
+        </div>
+
             <div id="layoutSidenav_content">

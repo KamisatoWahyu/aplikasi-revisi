@@ -1,7 +1,5 @@
 <?php
-session_start();
-//membuat koneksi ke database yang dibuat
-$conn = mysqli_connect("localhost","root","","inovasi_aplikasi_catatan");
+require 'config.php';
 
 //menambah penyewa  baru
 if(isset($_POST['addnewpenyewa'])){
