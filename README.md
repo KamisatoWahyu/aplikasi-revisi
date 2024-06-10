@@ -1,4 +1,4 @@
 ## APLIKASI ADMINISTRASI KOS
 
-Aplikasi ini adalah aplikasi untuk penulisan ilmiah<br />
-Menggunakan Bootstrap dan SQL 
+Aplikasi untuk penulisan ilmiah<br />
+pake template Bootstrap 
