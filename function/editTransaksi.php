@@ -18,7 +18,7 @@
             $keterangan = "Lunas";
         }
     
-        $update = mysqli_query($conn, "update data_transaksi set ID_Pembayaran = '$idpembayaran', ID_Admin = '$ambilidadmin', Tanggal_Bayar = '$tanggaltransaksi', sisatagihan = '$sisatagihan', Keterangan = '$keterangan' where ID_Pembayaran = '$idpembayaran'");
-        $insertrekaman = mysqli_query($conn, "insert into data_rekaman(ID_Pembayaran, waktutransaksi, keterangantransaksi) values('$idpembayaran', '$wkttransaksi', '$keterangan')");
+        $update = mysqli_query($conn, "update data_transaksi set ID_Pembayaran = '$idpembayaran', sisatagihan = '$sisatagihan', Keterangan = '$keterangan' where ID_Pembayaran = '$idpembayaran'");
+        $insertrekaman = mysqli_query($conn, "insert into data_rekaman(IdPembayaran, waktuTransaksi, ketTransaksi) values('$idpembayaran', '$wkttransaksi', '$keterangan')");
     }
 ?>

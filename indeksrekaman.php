@@ -2,14 +2,6 @@
     include 'lib/header.php';
 ?>
 
-<?php
-    $emailadmin = $_SESSION['username'];
-    $ambiladmin = mysqli_query($conn, "SELECT lvl, Nama_Admin as namaadmin FROM login Where Email = '$emailadmin'");
-    $namaadmin = mysqli_fetch_array($ambiladmin);
-    $ambilnamanya = $namaadmin['namaadmin'];
-    $lvladmin = $namaadmin['lvl'];
-?>
-
 <main>
     <div class="container-fluid">
         <br>       
@@ -37,7 +29,18 @@
                         </thead>
                         <tbody>
                         <?php
-                            $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_penyewa p, data_kamar k, data_transaksi tr, login l, tagihan t, data_rekaman r where r.ID_Pembayaran = tr.ID_Pembayaran AND t.ID_Admin=l.ID_Admin AND p.ID_Penyewa = tr.ID_Penyewa AND t.ID_Tagihan = tr.ID_Tagihan AND p.ID_Kamar = k.ID_Kamar order by tr.keterangan");
+                            $ambilsemuadatapenyewa = mysqli_query($conn, 
+                            "select * from data_rekaman r
+                            inner join data_transaksi tr
+                            on r.idPembayaran = tr.ID_Pembayaran
+                            inner join login l
+                            on tr.ID_Admin = l.ID_Admin
+                            inner join data_penyewa p
+                            on tr.ID_Penyewa = p.ID_Penyewa
+                            inner join data_kamar k
+                            on p.ID_Kamar = k.ID_Kamar
+                            order by tr.Keterangan
+                            ");
                         
                             while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
                             
@@ -48,9 +51,9 @@
                             $keterangan = $data['Keterangan'];
                             $idpembayaran = $data['ID_Pembayaran'];
                             $namaadmin = $data['Nama_Admin'];
-                            $tgl_transaksi = $data['waktutransaksi'];
+                            $tgl_transaksi = $data['waktuTransaksi'];
                             $jatuhtempo = $data['jatuh_tempo'];
-                            $ktr = $data['keterangantransaksi'];
+                            $ktr = $data['ketTransaksi'];
                             
                         ?>
                             <tr>

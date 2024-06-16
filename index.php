@@ -56,7 +56,7 @@
                         <?php
                         $tgl_skr = ('Y/m/d');
                         $angkatgl_skr = date('m', strtotime($tgl_skr));
-                        $ambillunas=mysqli_query($conn, "SELECT * from data_transaksi tr, tagihan t where tr.ID_Tagihan=t.ID_Tagihan And Keterangan = 'Lunas' And Month(jatuh_tempo) = $angkatgl_skr");
+                        $ambillunas=mysqli_query($conn, "SELECT * from data_transaksi where Keterangan = 'Lunas' And Month(jatuh_tempo) <= $angkatgl_skr");
                         $ceklunas=mysqli_num_rows($ambillunas);
                         ?>
                         <label>Tagihan yang telah lunas bulan ini</label>
@@ -74,7 +74,7 @@
                         <?php
                         $tgl_skr = ('Y/m/d');
                         $angkatgl_skr = date('m', strtotime($tgl_skr));
-                        $ambilbb=mysqli_query($conn, "SELECT * from data_transaksi tr, tagihan t where tr.ID_Tagihan=t.ID_Tagihan And Keterangan != 'Lunas' And Month(jatuh_tempo) = $angkatgl_skr");
+                        $ambilbb=mysqli_query($conn, "SELECT * from data_transaksi where Keterangan != 'Lunas' And Month(jatuh_tempo) = $angkatgl_skr");
                         $cekbb=mysqli_num_rows($ambilbb);
                         ?>
                         <label>Tagihan belum bayar dan cicil bulan ini</label>

@@ -3,15 +3,9 @@
 
     require 'function/addPenyewa.php';
     require 'function/editPenyewa.php';
-    require 'function/deletePenyewa.php'
+    require 'function/deletePenyewa.php';
 ?>
-<?php
-    $emailadmin = $_SESSION['username'];
-    $ambiladmin = mysqli_query($conn, "SELECT lvl, Nama_Admin as namaadmin FROM login Where Email = '$emailadmin'");
-    $namaadmin = mysqli_fetch_array($ambiladmin);
-    $ambilnamanya = $namaadmin['namaadmin'];
-    $lvladmin = $namaadmin['lvl'];
-?>
+
 <main>
     <div class="container-fluid">
         <h1 class="mt-4">Data Penyewa</h1>

@@ -1,5 +1,9 @@
 <?php
     include 'lib/header.php';
+
+    require 'function/addAdmin.php';
+    require 'function/editAdmin.php';
+    require 'function/deleteAdmin.php';
 ?>
 <main>
     <div class="container-fluid">
@@ -105,8 +109,8 @@
                                         <!-- Modal body -->
                                         <form method="post">
                                             <div class="modal-body">
-                                                Apakah anda yakin ingin menghapus Admin <?=$namaadmin?></b>?
-                                                <input type="hidden" name="idkamar" value="<?=$idadmin;?>">
+                                                Apakah anda yakin ingin menghapus Admin <?=$nama_admin?></b>?
+                                                <input type="hidden" name="idadmin" value="<?=$idadmin;?>">
                                             <br>
                                             <br>
                                                 <button type="submit" class="btn btn-danger" name="hapusadmin">Hapus</button>
@@ -135,7 +139,7 @@
     
         <!-- Modal Header -->
         <div class="modal-header">
-        <h4 class="modal-title">Tambah Kamar</h4>
+        <h4 class="modal-title">Tambah Admin</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -160,6 +164,9 @@
                 <button type="submit" class="btn btn-primary" name="addnewadmin">Submit</button>
             </div>
         </form> 
+    </div>
+    </div>
+</div>
 
 <?php
     include 'lib/footer.php';

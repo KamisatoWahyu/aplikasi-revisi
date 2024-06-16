@@ -1,12 +1,7 @@
 <?php
 require 'config.php';
 require 'cek.php';
-
-    $emailadmin = $_SESSION['username'];
-    $ambiladmin = mysqli_query($conn, "SELECT lvl, Nama_Admin as namaadmin FROM login Where Email = '$emailadmin'");
-    $namaadmin = mysqli_fetch_array($ambiladmin);
-    $ambilnamanya = $namaadmin['namaadmin'];
-    $lvladmin = $namaadmin['lvl'];
+require 'admin.php';
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +19,7 @@ require 'cek.php';
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Administrasi Kos</a>
+            <a class="navbar-brand" href="#">Administrasi Kos</a>
             
         </nav>
         <div id="layoutSidenav">
@@ -52,7 +47,6 @@ require 'cek.php';
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="indeksTagihan.php">Laporan Tagihan</a>
                                     <a class="nav-link" href="indeksTransaksi.php">Laporan Transaksi</a>
                                     <a class="nav-link" href="indeksRekaman.php">Rekaman Transaksi</a>
                                 </nav>
@@ -74,13 +68,6 @@ require 'cek.php';
                     </div>
 
                     <div class="sb-sidenav-footer">
-                        <?php
-                        $emailadmin = $_SESSION['username'];
-                        $ambiladmin = mysqli_query($conn, "SELECT Nama_Admin as namaadmin FROM login Where Email = '$emailadmin'");
-                        $namaadmin = mysqli_fetch_array($ambiladmin);
-                        $ambilnamanya = $namaadmin['namaadmin'];
-                        ?>
-
                         <div class="small">
                             Logged in as:
                             <br><?=$ambilnamanya;?>

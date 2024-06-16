@@ -36,34 +36,33 @@ if(isset($_POST['addnewpenyewa'])){
 
     //mengubah status kamar menjadi penuh
     $updatestatuskamar = mysqli_query($conn, "update data_kamar set Status= 'Penuh' where ID_Kamar = '$idkamar'");
-    $querytagihan = mysqli_query($conn, "SELECT max(ID_Tagihan) as id_terbesar FROM tagihan");
     
+    // $querytagihan = mysqli_query($conn, "SELECT max(ID_Tagihan) as id_terbesar FROM tagihan");
     //menambah langsung tagihan baru
-    $datatagihan = mysqli_fetch_array($querytagihan);
-    $kodetagihan = $datatagihan['id_terbesar'];
-    $urutan = (int) substr($kodetagihan, 3, 7);
-    $urutan++; 
-    $huruftagihan = "TG";
-    $idtagihan = $huruftagihan . sprintf("%05s", $urutan);
+    // $datatagihan = mysqli_fetch_array($querytagihan);
+    // $kodetagihan = $datatagihan['id_terbesar'];
+    // $urutan = (int) substr($kodetagihan, 3, 7);
+    // $urutan++; 
+    // $huruftagihan = "TG";
+    // $idtagihan = $huruftagihan . sprintf("%05s", $urutan);
+
     $jatuhtempo = $tanggal_masuk;
     date_default_timezone_set('Asia/Jakarta');
     $tgltagih = date("Y-m-d H:i:s");
-    $addtagihanpertama = mysqli_query($conn, "insert into tagihan (ID_Tagihan, ID_Admin, ID_Penyewa, ID_Kamar, tanggaltagih, jatuh_tempo) 
-    values('$idtagihan', '$ambilidadmin', '$idpenyewa', '$idkamar', '$tgltagih', '$jatuhtempo')");
 
     //menambah transaksi baru
     $querypembayaran = mysqli_query($conn, "SELECT max(ID_Pembayaran) as id_terbesar FROM data_transaksi");
     $datapembayaran = mysqli_fetch_array($querypembayaran);
     $kodepembayaran = $datapembayaran['id_terbesar'];
-    $urutan = (int) substr($kodepembayaran, 2, 4);
+    $urutan = (int) substr($kodepembayaran, 3, 7);
     $urutan++;  
-    $hurufpembayaran = "T";
-    $idpembayaran = $hurufpembayaran. sprintf("%03s", $urutan);
+    $hurufpembayaran = "TR";
+    $idpembayaran = $hurufpembayaran. sprintf("%05s", $urutan);
     
     $cekbiaya = mysqli_query($conn, " SELECT * from data_kamar where ID_Kamar = '$idkamar'");
     $ambilbiaya = mysqli_fetch_array($cekbiaya);
     $biaya = $ambilbiaya['Biaya'];
-    $addtotabletransaksi = mysqli_query($conn, "insert into data_transaksi (ID_Pembayaran, ID_Admin, ID_Penyewa, ID_Tagihan, sisatagihan, Keterangan) 
-    values('$idpembayaran', '$ambilidadmin', '$idpenyewa', '$idtagihan', '$biaya', 'Belum Bayar')");
+    $addtotabletransaksi = mysqli_query($conn, "insert into data_transaksi(ID_Pembayaran, ID_Admin, ID_Penyewa, sisatagihan, Keterangan, tanggaltagih, jatuh_tempo) 
+    values('$idpembayaran', '$ambilidadmin', '$idpenyewa', '$biaya', 'Belum Bayar', '$tgltagih', '$jatuhtempo')");
 }
 ?>

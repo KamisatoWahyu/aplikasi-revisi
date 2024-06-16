@@ -16,6 +16,6 @@
         $idadmin = mysqli_fetch_array($ambiladmin);
         $ambilidadmin = $idadmin['idadmin'];
         
-        $addtotabletransaksi = mysqli_query($conn, "insert into data_transaksi (ID_Pembayaran, ID_Admin, ID_Penyewa, Tanggal_Bayar, Keterangan) values('$idpembayaran', '$ambilidadmin', '$idpenyewa', '$tanggalbayar', 'Belum Bayar')");
+        $addtotabletransaksi = mysqli_query($conn, "insert into data_transaksi (ID_Pembayaran, ID_Admin, ID_Penyewa, Keterangan) values('$idpembayaran', '$ambilidadmin', '$idpenyewa', 'Belum Bayar')");
     }
 ?>

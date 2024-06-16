@@ -1,8 +1,6 @@
 <?php
 require 'config.php';
 
-session_start();
-
 //cek login masuk apo idak
 if(isset($_POST['login'])){
     $email = $_POST['email'];

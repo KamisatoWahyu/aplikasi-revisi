@@ -1,27 +1,14 @@
 <?php
     include 'lib/header.php';
-?>
-
-<?php
-    $emailadmin = $_SESSION['username'];
-    $ambiladmin = mysqli_query($conn, "SELECT lvl, Nama_Admin as namaadmin FROM login Where Email = '$emailadmin'");
-    $namaadmin = mysqli_fetch_array($ambiladmin);
-    $ambilnamanya = $namaadmin['namaadmin'];
-    $lvladmin = $namaadmin['lvl'];
+    require 'function/addTagihan.php';
+    require 'function/editTransaksi.php';
+    require 'function/deleteTransaksi.php';
+    
 ?>
 
 <main>
     <div class="container-fluid">
-        <br>
-        <?php
-            $ambillaporan=mysqli_query($conn,"SELECT * from tagihan t, data_transaksi tr where t.ID_Tagihan = tr.ID_Tagihan AND tr.Keterangan != 'Lunas' ");
-            $ceklaporan=mysqli_num_rows($ambillaporan);
-            if($ceklaporan!=0){
-        ?>
-        <div class="alert alert-danger" role="alert">
-        Terdapat <?=$ceklaporan;?> tagihan masih dalam status belum bayar atau cicil. Segera hubungi penyewa untuk melunasi tagihan!
-        </div>
-        <?php } ?>
+        
         <h1 class="mt-4">Data Transaksi</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active"></li>
@@ -29,7 +16,7 @@
         
         <div class="card mb-4">
             <div class="card-header">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buattagihansemua">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buattagihan">
                         Buat tagihan bulan ini
                 </button>
                 <a href = "exportlaporan.php" class="btn btn-info" target="_blank">
@@ -104,7 +91,16 @@
                         }elseif(isset($_POST['hapusfilter'])){
                             $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_penyewa p, data_kamar k, data_transaksi tr, login l, tagihan t where t.ID_Admin=l.ID_Admin AND p.ID_Penyewa = tr.ID_Penyewa AND t.ID_Tagihan = tr.ID_Tagihan AND p.ID_Kamar = k.ID_Kamar order by tr.keterangan");
                         }else{
-                            $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_penyewa p, data_kamar k, data_transaksi tr, login l, tagihan t where t.ID_Admin=l.ID_Admin AND p.ID_Penyewa = tr.ID_Penyewa AND t.ID_Tagihan = tr.ID_Tagihan AND p.ID_Kamar = k.ID_Kamar order by tr.keterangan");
+                            $ambilsemuadatapenyewa = mysqli_query($conn, "select 
+                            *
+                            from data_transaksi tr
+                            inner join login l
+                            on tr.ID_Admin = l.ID_Admin
+                            inner join data_penyewa p
+                            on tr.ID_Penyewa = p.ID_Penyewa
+                            inner join data_kamar k
+                            on p.ID_Kamar = k.ID_Kamar
+                            order by tr.Keterangan");
                         }
                         
                         while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
@@ -118,8 +114,6 @@
                             $namaadmin = $data['Nama_Admin'];
                             $jatuhtempo = $data['jatuh_tempo'];
                             
-
-
                             $getnomor = substr($nomorhandphone, 2);
                             $kodenomor = "628";
                             $getnomorfix = $kodenomor. $getnomor;
@@ -154,89 +148,88 @@
                                     Terima kasih!" class="btn btn-success" role="button" aria-disabled="true" data-toggle="tooltip" data-placement="bottom" title="Hubungi via Whatsapp" target="_blank">Whatsapp</a>
                                 </td>
                             </tr>
-                          
+                        <!-- Edit Modal -->
+                        <div class="modal fade" id="edit<?=$idpembayaran;?>">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Edit data laporan</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <form method="post">
+                                    <div class="modal-body">
+                                        <label>Nama Penyewa</label>
+                                        <input type="text" name="namapenyewa" value="<?=$namapenyewa?>" class="form-control" readonly/>
+                                        <?php if($keterangan=='Belum Bayar' || $keterangan == 'Cicil') { ?>
+                                        <br>
+                                        <label>Tanggal Transaksi</label>
+                                        <input type="date" name="tanggaltransaksi" value="<?php echo date('Y-m-d'); ?>" class="form-control" required>
+                                        <br>
+                                        <br>
+                                        <div class="form-group">
+                                            <label>Total Tagihan</label>
+                                            <input type='text' class="form-control" name="tagih" id="tagih" value="<?=$sisatagihan?>" readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Dibayar</label>
+                                            <input type='number' min="1" max="<?=$sisatagihan;?>" class="form-control" name="bayar" id="bayar" placeholder="Uang pembayaran"/>
+                                        <?php }else{ ?>
+                                            <br>
+                                            Tagihan telah dibayar lunas.
+                                            <?php } ?>
+                                            <br>
+                                        <br>
+                                            
+                                        <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
+                                        <button type="submit" class="btn btn-warning" name="updatelaporan">Edit</button>
+                                    </div>
+                                </form> 
+                                                                    
+                            </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="delete<?=$idpembayaran;?>">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Hapus data laporan</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <form method="post">
+                                    <div class="modal-body">
+                                        Apakah anda yakin ingin menghapus data dengan nama <b><?=$namapenyewa;?></b>?
+                                        <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
+                                    <br>
+                                    <br>
+                                        <button type="submit" class="btn btn-danger" name="hapuslaporan">Hapus</button>
+                                    </div>
+                                </form> 
+                                                                    
+                            </div>
+                            </div>
+                        </div>
+                                            
+                        <?php
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-        <!-- Edit Modal -->
-        <div class="modal fade" id="edit<?=$idpembayaran;?>">
-            <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <!-- Modal Header -->
-                <div class="modal-header">
-                <h4 class="modal-title">Edit data laporan</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                
-                <!-- Modal body -->
-                <form method="post">
-                    <div class="modal-body">
-                        <label>Nama Penyewa</label>
-                        <input type="text" name="namapenyewa" value="<?=$namapenyewa?>" class="form-control" readonly/>
-                        <?php if($keterangan=='Belum Bayar' || $keterangan == 'Cicil') { ?>
-                        <br>
-                        <label>Tanggal Transaksi</label>
-                        <input type="date" name="tanggaltransaksi" value="<?php echo date('Y-m-d'); ?>" class="form-control" required>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            <label>Total Tagihan</label>
-                            <input type='text' class="form-control" name="tagih" id="tagih" value="<?=$sisatagihan?>" readonly/>
-                        </div>
-                        <div class="form-group">
-                            <label>Dibayar</label>
-                            <input type='number' min="1" max="<?=$sisatagihan;?>" class="form-control" name="bayar" id="bayar" placeholder="Uang pembayaran"/>
-                        <?php }else{ ?>
-                            <br>
-                            Tagihan telah dibayar lunas.
-                            <?php } ?>
-                            <br>
-                        <br>
-                            
-                        <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
-                        <button type="submit" class="btn btn-warning" name="updatelaporan">Edit</button>
-                    </div>
-                </form> 
-                                                    
-            </div>
-            </div>
-        </div>
-
-        <!-- Delete Modal -->
-        <div class="modal fade" id="delete<?=$idpembayaran;?>">
-            <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <!-- Modal Header -->
-                <div class="modal-header">
-                <h4 class="modal-title">Hapus data laporan</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                
-                <!-- Modal body -->
-                <form method="post">
-                    <div class="modal-body">
-                        Apakah anda yakin ingin menghapus data dengan nama <b><?=$namapenyewa;?></b>?
-                        <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
-                    <br>
-                    <br>
-                        <button type="submit" class="btn btn-danger" name="hapuslaporan">Hapus</button>
-                    </div>
-                </form> 
-                                                    
-            </div>
-            </div>
-        </div>
-                            
-                        <?php
-                        }
-                        ?>
+        
 
         </div>
     </div>
-</main>
 
 <!-- Buat Modal -->
 <div class="modal fade" id="buattagihan">
@@ -252,17 +245,30 @@
         <!-- Modal body -->
         <form method="post">
             <div class="modal-body">
-                Apakah anda yakin ingin membuat data tagihan bulan selanjutnya?
+                <?php 
+                $tgl_skr = date('Y/m/d');
+                $angkatgl_skr = date('m', strtotime($tgl_skr));
+                $ambildatatagihan=mysqli_query($conn, "SELECT * from data_transaksi where month(jatuh_tempo) = $angkatgl_skr");
+                $cekbanyaktagihan=mysqli_num_rows($ambildatatagihan);
+                $ambildatapenyewa=mysqli_query($conn, "SELECT * from data_penyewa");
+                $cekbanyakpenyewa=mysqli_num_rows($ambildatapenyewa);
+                if($cekbanyaktagihan != $cekbanyakpenyewa){?>
+                Apakah anda yakin ingin membuat data tagihan bulan ini? 
+                <br>Tersisa <?=$cekbanyakpenyewa-$cekbanyaktagihan?> dari <?=$cekbanyakpenyewa?> penyewa
             <br>
             <br>
                 <button type="submit" class="btn btn-success" name="addnewtagihan">Buat Semua Tagihan</button>
-            
             </div>
         </form> 
-                                            
+            <?php }else{ ?>   
+            Semua penyewa sudah ditagih   <?=$cekbanyakpenyewa?> <?=$cekbanyaktagihan?> 
+            <?php } ?>                           
     </div>
     </div>
 </div>
+
+
+</main>
 
 <?php
     include 'lib/footer.php';

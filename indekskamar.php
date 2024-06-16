@@ -9,13 +9,7 @@
 <main>
     <div class="container-fluid">
     <br>
-    <?php
-            $emailadmin = $_SESSION['username'];
-            $ambiladmin = mysqli_query($conn, "SELECT lvl, Nama_Admin as namaadmin FROM login Where Email = '$emailadmin'");
-            $namaadmin = mysqli_fetch_array($ambiladmin);
-            $ambilnamanya = $namaadmin['namaadmin'];
-            $lvladmin = $namaadmin['lvl'];
-    ?>
+
         <?php
             $ambillaporan=mysqli_query($conn,"SELECT * from data_kamar where status='Kosong'");
             $ceklaporan=mysqli_num_rows($ambillaporan);
