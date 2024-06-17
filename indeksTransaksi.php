@@ -8,18 +8,27 @@
 
 <main>
     <div class="container-fluid">
-        
-        <h1 class="mt-4">Data Transaksi</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active"></li>
-        </ol>
+    <?php
+        $ambillaporan=mysqli_query($conn,"SELECT * from data_transaksi where keterangan != 'Lunas' ");
+        $ceklaporan=mysqli_num_rows($ambillaporan);
+        if($ceklaporan!=0){
+    ?>
+    <div class="alert alert-danger" role="alert">
+    Terdapat <?=$ceklaporan;?> tagihan masih dalam status belum bayar atau cicil. Segera hubungi penyewa untuk melunasi tagihan!
+    </div>
+    <?php } ?>
+    
+    <h1 class="mt-4">Data Transaksi</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active"></li>
+    </ol>
         
         <div class="card mb-4">
             <div class="card-header">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buattagihan">
                         Buat tagihan bulan ini
                 </button>
-                <a href = "export/exportlaporan.php" class="btn btn-info" target="_blank">
+                <a href = "export/exportTransaksi.php" class="btn btn-info" target="_blank">
                         Export data
                 </a>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#filter">
@@ -111,7 +120,7 @@
                             $sisatagihan = $data['sisaTagihan'];
                             $keterangan = $data['keterangan'];
                             $idpembayaran = $data['idPembayaran'];
-                            $namaadmin = $data['namaAdmin'];
+                            $namaadmin = $data['username'];
                             $jatuhtempo = $data['jatuhTempo'];
                             
                             $getnomor = substr($nomorhandphone, 2);
@@ -261,7 +270,7 @@
             </div>
         </form> 
             <?php }else{ ?>   
-            Semua penyewa sudah ditagih   <?=$cekbanyakpenyewa?> <?=$cekbanyaktagihan?> 
+            Semua penyewa sudah ditagih
             <?php } ?>                           
     </div>
     </div>

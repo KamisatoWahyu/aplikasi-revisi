@@ -7,7 +7,7 @@
 ?>
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Data Kamar</h1>
+        <h1 class="mt-4">Data Admin</h1>
         <div class="card mb-4">
             <div class="card-header">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -33,7 +33,7 @@
                         $ambilsemuadataadmin = mysqli_query($conn, "select * from login");
                         while($data=mysqli_fetch_array($ambilsemuadataadmin)){
                             $idadmin= $data['idAdmin'];
-                            $nama_admin = $data['namaAdmin'];
+                            $nama_admin = $data['username'];
                             $email = $data['email'];
                             $password = $data['password'];
                             $lvl = $data['lvl'];

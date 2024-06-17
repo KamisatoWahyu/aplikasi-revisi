@@ -42,7 +42,7 @@ require '../cek.php';
         inner join login l on tr.idAdmin = l.idAdmin
         inner join data_penyewa p on tr.idPenyewa = p.idPenyewa
         inner join data_kamar k on p.idKamar = k.idKamar
-        inner join data_rekaman r on tr.idPembayaran = r.idPembayaran
+        left join data_rekaman r on tr.idPembayaran = r.idPembayaran
         ");
         while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
             
@@ -51,14 +51,21 @@ require '../cek.php';
             $biaya = $data['biaya'];
             $sisatagihan = $data['sisaTagihan'];
             $keterangan = $data['keterangan'];
-            $namaadmin = $data['namaAdmin'];
+            $namaadmin = $data['username'];
             $jatuhtempo = $data['jatuhTempo'];
         ?>
             <tr>
                 <td><?php echo $namaadmin?></td>
                 <td><?php echo $namapenyewa?></td>
                 <td><?php echo date("d/M/Y", strtotime($jatuhtempo))?></td>
-                <td><?php echo date("d/M/Y", strtotime($tanggaltransaksi))?></td>
+                <td>
+                    <?php 
+                    if(is_null($tanggaltransaksi)){
+                        echo "-";
+                    }else{
+                    echo date("d/M/Y", strtotime($tanggaltransaksi));
+                    }?>
+                </td>
                 <td><?php echo "Rp".$biaya?></td>
                 <td><?php echo "Rp".$sisatagihan?></td>
                 <td><?php echo $keterangan?></td>

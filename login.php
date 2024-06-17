@@ -7,7 +7,7 @@ if(isset($_POST['login'])){
     $password = $_POST['password'];
 
     //mencocoki database, samo apo idak datanyo
-    $cekdatabase = mysqli_query($conn, "SELECT * FROM login where namaAdmin ='$username' and password='$password'");
+    $cekdatabase = mysqli_query($conn, "SELECT * FROM login where username ='$username' and password='$password'");
     //ngitung jumlah data
     $hitung = mysqli_num_rows($cekdatabase);
     if($hitung>0){

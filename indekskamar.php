@@ -8,7 +8,6 @@
 
 <main>
     <div class="container-fluid">
-    <br>
 
         <?php
             $ambillaporan=mysqli_query($conn,"SELECT * from data_kamar where status='Kosong'");
@@ -26,7 +25,7 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                     Tambah Kamar
             </button>
-            <a href = "export/exportkamar.php" class="btn btn-info" target="_blank">
+            <a href = "export/exportKamar.php" class="btn btn-info" target="_blank">
                     Export data
             </a>
             </div>

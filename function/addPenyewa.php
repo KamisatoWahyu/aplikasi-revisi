@@ -2,7 +2,7 @@
 //menambah penyewa  baru
 if(isset($_POST['addnewpenyewa'])){
     $username = $_SESSION['username'];
-    $ambiladmin = mysqli_query($conn, "SELECT idAdmin FROM login Where namaAdmin = '$username'");
+    $ambiladmin = mysqli_query($conn, "SELECT idAdmin FROM login Where username = '$username'");
     $idadmin = mysqli_fetch_array($ambiladmin);
     $ambilidadmin = $idadmin['idAdmin'];
     //tutorial dari malasngoding.com__Membuat Kode Otomatis Dengan PHP dan MySQLi hehe akhirnya

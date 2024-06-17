@@ -15,7 +15,7 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                     Tambah data
                 </button>
-                <a href = "exportpenyewa.php" class="btn btn-info" target="_blank">
+                <a href = "export/exportPenyewa.php" class="btn btn-info" target="_blank">
                     Export data
                 </a>
             </div>

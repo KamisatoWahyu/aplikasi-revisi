@@ -5,7 +5,7 @@ if(isset($_POST['addnewtagihan'])){
     $cektabeltagihan = mysqli_num_rows($tabeltagihan);
 
     $username = $_SESSION['username'];
-    $ambiladmin = mysqli_query($conn, "SELECT idAdmin as idadmin FROM login Where namaAdmin = '$username'");
+    $ambiladmin = mysqli_query($conn, "SELECT idAdmin as idadmin FROM login Where username = '$username'");
     $idadmin = mysqli_fetch_array($ambiladmin);
     $ambilidadmin = $idadmin['idadmin'];
 
@@ -31,7 +31,7 @@ if(isset($_POST['addnewtagihan'])){
             date_default_timezone_set('Asia/Jakarta');
             $tgltagih = date("Y-m-d H:i:s");
             $username = $_SESSION['username'];
-            $ambiladmin = mysqli_query($conn, "SELECT idAdmin as idadmin FROM login Where namaAdmin = '$username'");
+            $ambiladmin = mysqli_query($conn, "SELECT idAdmin as idadmin FROM login Where username = '$username'");
             $idadmin = mysqli_fetch_array($ambiladmin);
             $ambilidadmin = $idadmin['idAdmin'];
             

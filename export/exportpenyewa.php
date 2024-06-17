@@ -37,16 +37,15 @@ require '../cek.php';
                 </thead>
                 <tbody>
                 <?php
-                $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_penyewa p inner join data_kamar k on p.ID_Kamar = k.ID_Kamar");
+                $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_penyewa p inner join data_kamar k on p.idKamar = k.idKamar");
                 while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
-                    $idpenyewa = $data['ID_Penyewa'];
-                    $namapenyewa = $data['Nama_Penyewa'];
-                    $nomorhandphone = $data['Nomor_Handphone'];
-                    $alamatrumah = $data['Alamat_Rumah'];
+                    $idpenyewa = $data['idPenyewa'];
+                    $namapenyewa = $data['namaPenyewa'];
+                    $nomorhandphone = $data['nomorHandphone'];
+                    $alamatrumah = $data['alamatRumah'];
                     $nik = $data['NIK'];
-                    $tanggalmasuk = $data['Tanggal_Masuk'];
-                    $idp = $data['ID_Penyewa'];
-                    $nomorkamar = "Kamar ".$data['No_Kamar'];
+                    $tanggalmasuk = $data['tanggalMasuk'];
+                    $nomorkamar = "Kamar ".$data['noKamar'];
                 ?>
                     <tr>
                         <td><?php echo $idpenyewa?></td>s

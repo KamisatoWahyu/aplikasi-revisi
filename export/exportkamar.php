@@ -39,11 +39,11 @@ require '../cek.php';
             <?php
             $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_kamar");
             while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
-                $idkamar= $data['ID_Kamar'];
-                $nomorkamar = "Kamar ".$data['No_Kamar'];
-                $jeniskamar = $data['Jenis_Kamar'];
-                $jumlahfasilitas = $data['Jumlah_Fasilitas'];
-                $biaya = $data['Biaya'];
+                $idkamar= $data['idKamar'];
+                $nomorkamar = "Kamar ".$data['noKamar'];
+                $jeniskamar = $data['jenisKamar'];
+                $jumlahfasilitas = $data['jumlahFasilitas'];
+                $biaya = $data['biaya'];
             ?>
                 <tr>
                     <td><?php echo $idkamar?></td>

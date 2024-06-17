@@ -12,7 +12,7 @@
         $tanggalbayar = $_POST['tanggalbayar'];
     
         $username = $_SESSION['username'];
-        $ambiladmin = mysqli_query($conn, "SELECT idAdmin as idadmin FROM login Where namaAdmin = '$username'");
+        $ambiladmin = mysqli_query($conn, "SELECT idAdmin as idadmin FROM login Where username = '$username'");
         $idadmin = mysqli_fetch_array($ambiladmin);
         $ambilidadmin = $idadmin['idadmin'];
         

@@ -8,12 +8,7 @@
         <h1 class="mt-4">Data Transaksi</h1>
          
         <div class="card mb-4">
-            <div class="card-header">
-                <a href = "exportlaporan.php" class="btn btn-info" target="_blank">
-                        Export data
-            </a>
-            </div>
-            
+            <div class="card-header"></div>
         
             <div class="card-body">
                 <div class="table-responsive">
@@ -50,7 +45,7 @@
                             $sisatagihan = $data['sisaTagihan'];
                             $keterangan = $data['keterangan'];
                             $idpembayaran = $data['idPembayaran'];
-                            $namaadmin = $data['namaAdmin'];
+                            $namaadmin = $data['username'];
                             $tgl_transaksi = $data['waktuTransaksi'];
                             $jatuhtempo = $data['jatuhTempo'];
                             $ktr = $data['ketTransaksi'];
