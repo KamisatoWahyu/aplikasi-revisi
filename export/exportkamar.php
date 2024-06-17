@@ -19,47 +19,46 @@ require '../cek.php';
 <div class="container">
     <br>
     <br>
-			<h1>Data Kamar</h1>
-            <br>
-            <h8>Pilih bentuk data atau fitur yang ingin digunakan</h8>
-				<div class="data-tables datatable-dark">
-					
-                <table class="table table-bordered" id="mauexport" width="100%" cellspacing="0">
-                <thead>
-                                            <tr>
-                                                <th>ID Kamar</th>
-                                                <th>Nomor Kamar</th>
-                                                <th>Jenis Kamar</th>
-                                                <th>Jumlah Fasilitas</th>
-                                                <th>Biaya</th>
-                                            </tr>                                            
-                                        </thead>
-                                       
-                                        <tbody>
-                                        <?php
-                                        $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_kamar");
-                                        while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
-                                            $idkamar= $data['ID_Kamar'];
-                                            $nomorkamar = "Kamar ".$data['No_Kamar'];
-                                            $jeniskamar = $data['Jenis_Kamar'];
-                                            $jumlahfasilitas = $data['Jumlah_Fasilitas'];
-                                            $biaya = $data['Biaya'];
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $idkamar?></td>
-                                                <td><?php echo $nomorkamar?></td>
-                                                <td><?php echo $jeniskamar?></td>
-                                                <td><?php echo $jumlahfasilitas?></td>
-                                                <td><?php echo "Rp".$biaya?></td>
-                                            </tr>
+    <h1>Data Kamar</h1>
+    <br>
+    <h8>Pilih bentuk data atau fitur yang ingin digunakan</h8>
+        <div class="data-tables datatable-dark">
+            
+        <table class="table table-bordered" id="mauexport" width="100%" cellspacing="0">
+        <thead>
+                <tr>
+                    <th>ID Kamar</th>
+                    <th>Nomor Kamar</th>
+                    <th>Jenis Kamar</th>
+                    <th>Jumlah Fasilitas</th>
+                    <th>Biaya</th>
+                </tr>                                            
+            </thead>
+            
+            <tbody>
+            <?php
+            $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_kamar");
+            while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
+                $idkamar= $data['ID_Kamar'];
+                $nomorkamar = "Kamar ".$data['No_Kamar'];
+                $jeniskamar = $data['Jenis_Kamar'];
+                $jumlahfasilitas = $data['Jumlah_Fasilitas'];
+                $biaya = $data['Biaya'];
+            ?>
+                <tr>
+                    <td><?php echo $idkamar?></td>
+                    <td><?php echo $nomorkamar?></td>
+                    <td><?php echo $jeniskamar?></td>
+                    <td><?php echo $jumlahfasilitas?></td>
+                    <td><?php echo "Rp".$biaya?></td>
+                </tr>
 
-                                        <?php
-                                        }
-                                        ?>
-                                        </tbody>
-                                    </table>
-					
-				</div>
+            <?php
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 	
 <script>

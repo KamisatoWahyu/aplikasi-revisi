@@ -32,10 +32,10 @@
                         <?php
                         $ambilsemuadataadmin = mysqli_query($conn, "select * from login");
                         while($data=mysqli_fetch_array($ambilsemuadataadmin)){
-                            $idadmin= $data['ID_Admin'];
-                            $nama_admin = $data['Nama_Admin'];
-                            $email = $data['Email'];
-                            $password = $data['Password'];
+                            $idadmin= $data['idAdmin'];
+                            $nama_admin = $data['namaAdmin'];
+                            $email = $data['email'];
+                            $password = $data['password'];
                             $lvl = $data['lvl'];
                         ?>
                             <tr>

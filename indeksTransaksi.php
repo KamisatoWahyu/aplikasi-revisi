@@ -19,7 +19,7 @@
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buattagihan">
                         Buat tagihan bulan ini
                 </button>
-                <a href = "exportlaporan.php" class="btn btn-info" target="_blank">
+                <a href = "export/exportlaporan.php" class="btn btn-info" target="_blank">
                         Export data
                 </a>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#filter">
@@ -45,7 +45,7 @@
                             <select name="filterid" class="form-control">
                             <option value="pilih" selected>----PILIH PENYEWA----</option>
                             <?php
-                            $cekpenyewa = mysqli_query($conn, "SELECT Nama_Penyewa, ID_Penyewa from data_penyewa");
+                            $cekpenyewa = mysqli_query($conn, "SELECT namaPenyewa, idPenyewa from data_penyewa");
                             while($ambilpenyewa=mysqli_fetch_array($cekpenyewa)){
                                 $id_penyewa=$ambilpenyewa['ID_Penyewa'];
                                 $nama_penyewa=$ambilpenyewa['Nama_Penyewa'];
@@ -95,24 +95,24 @@
                             *
                             from data_transaksi tr
                             inner join login l
-                            on tr.ID_Admin = l.ID_Admin
+                            on tr.idAdmin = l.idAdmin
                             inner join data_penyewa p
-                            on tr.ID_Penyewa = p.ID_Penyewa
+                            on tr.idPenyewa = p.idPenyewa
                             inner join data_kamar k
-                            on p.ID_Kamar = k.ID_Kamar
+                            on p.idKamar = k.idKamar
                             order by tr.Keterangan");
                         }
                         
                         while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
 
-                            $namapenyewa = $data['Nama_Penyewa'];
-                            $nomorhandphone = $data['Nomor_Handphone'];
-                            $biaya = $data['Biaya'];
-                            $sisatagihan = $data['sisatagihan'];
-                            $keterangan = $data['Keterangan'];
-                            $idpembayaran = $data['ID_Pembayaran'];
-                            $namaadmin = $data['Nama_Admin'];
-                            $jatuhtempo = $data['jatuh_tempo'];
+                            $namapenyewa = $data['namaPenyewa'];
+                            $nomorhandphone = $data['nomorHandphone'];
+                            $biaya = $data['biaya'];
+                            $sisatagihan = $data['sisaTagihan'];
+                            $keterangan = $data['keterangan'];
+                            $idpembayaran = $data['idPembayaran'];
+                            $namaadmin = $data['namaAdmin'];
+                            $jatuhtempo = $data['jatuhTempo'];
                             
                             $getnomor = substr($nomorhandphone, 2);
                             $kodenomor = "628";
@@ -148,6 +148,33 @@
                                     Terima kasih!" class="btn btn-success" role="button" aria-disabled="true" data-toggle="tooltip" data-placement="bottom" title="Hubungi via Whatsapp" target="_blank">Whatsapp</a>
                                 </td>
                             </tr>
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="delete<?=$idpembayaran;?>">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Hapus data laporan</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <form method="post">
+                                    <div class="modal-body">
+                                        Apakah anda yakin ingin menghapus data dengan nama <b><?=$namapenyewa;?></b>?
+                                        <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
+                                    <br>
+                                    <br>
+                                        <button type="submit" class="btn btn-danger" name="hapuslaporan">Hapus</button>
+                                    </div>
+                                </form> 
+                                                                    
+                            </div>
+                            </div>
+                        </div>
+
                         <!-- Edit Modal -->
                         <div class="modal fade" id="edit<?=$idpembayaran;?>">
                             <div class="modal-dialog">
@@ -192,32 +219,6 @@
                             </div>
                             </div>
                         </div>
-
-                        <!-- Delete Modal -->
-                        <div class="modal fade" id="delete<?=$idpembayaran;?>">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                            
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                <h4 class="modal-title">Hapus data laporan</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                
-                                <!-- Modal body -->
-                                <form method="post">
-                                    <div class="modal-body">
-                                        Apakah anda yakin ingin menghapus data dengan nama <b><?=$namapenyewa;?></b>?
-                                        <input type="hidden" name="idpembayaran" value="<?=$idpembayaran;?>">
-                                    <br>
-                                    <br>
-                                        <button type="submit" class="btn btn-danger" name="hapuslaporan">Hapus</button>
-                                    </div>
-                                </form> 
-                                                                    
-                            </div>
-                            </div>
-                        </div>
                                             
                         <?php
                         }
@@ -246,9 +247,8 @@
         <form method="post">
             <div class="modal-body">
                 <?php 
-                $tgl_skr = date('Y/m/d');
-                $angkatgl_skr = date('m', strtotime($tgl_skr));
-                $ambildatatagihan=mysqli_query($conn, "SELECT * from data_transaksi where month(jatuh_tempo) = $angkatgl_skr");
+                $hariIni = date('y/m/d');
+                $ambildatatagihan=mysqli_query($conn, "SELECT * from data_transaksi where month(jatuhTempo) = month('$hariIni')");
                 $cekbanyaktagihan=mysqli_num_rows($ambildatatagihan);
                 $ambildatapenyewa=mysqli_query($conn, "SELECT * from data_penyewa");
                 $cekbanyakpenyewa=mysqli_num_rows($ambildatapenyewa);

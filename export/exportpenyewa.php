@@ -19,52 +19,50 @@ require '../cek.php';
 <div class="container">
     <br>
     <br>
-			<h1>Data Penyewa</h1>
-            <br>
-            <h8>Pilih bentuk data atau fitur yang ingin digunakan</h8>
-				<div class="data-tables datatable-dark">
-					
-                <table class="table table-bordered" id="mauexport" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ID Penyewa</th>
-                                                <th>Nama Penyewa</th>
-                                                <th>Nomor Handphone</th>
-                                                <th>Alamat Rumah</th>
-                                                <th>NIK</th>
-                                                <th>Nomor Kamar</th>
-                                                <th>Tanggal Masuk</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                        $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_penyewa, data_kamar where data_kamar.ID_Kamar = data_penyewa.ID_Kamar");
-                                        while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
-                                            $idpenyewa = $data['ID_Penyewa'];
-                                            $namapenyewa = $data['Nama_Penyewa'];
-                                            $nomorhandphone = $data['Nomor_Handphone'];
-                                            $alamatrumah = $data['Alamat_Rumah'];
-                                            $nik = $data['NIK'];
-                                            $tanggalmasuk = $data['Tanggal_Masuk'];
-                                            $idp = $data['ID_Penyewa'];
-                                            $nomorkamar = "Kamar ".$data['No_Kamar'];
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $idpenyewa?></td>s
-                                                <td><?php echo $namapenyewa?></td>
-                                                <td><?php echo $nomorhandphone?></td>
-                                                <td><?php echo $alamatrumah?></td>
-                                                <td><?php echo $nik?></td>
-                                                <td><?php echo $nomorkamar?></td>
-                                                <td><?php echo $tanggalmasuk?></td>
-                                            </tr>
-                                        <?php
-                                        }
-                                        ?>
-                                        </tbody>
-                                    </table>
-					
-				</div>
+        <h1>Data Penyewa</h1>
+        <br>
+        <h8>Pilih bentuk data atau fitur yang ingin digunakan</h8>
+        <div class="data-tables datatable-dark">        
+            <table class="table table-bordered" id="mauexport" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID Penyewa</th>
+                        <th>Nama Penyewa</th>
+                        <th>Nomor Handphone</th>
+                        <th>Alamat Rumah</th>
+                        <th>NIK</th>
+                        <th>Nomor Kamar</th>
+                        <th>Tanggal Masuk</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_penyewa p inner join data_kamar k on p.ID_Kamar = k.ID_Kamar");
+                while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
+                    $idpenyewa = $data['ID_Penyewa'];
+                    $namapenyewa = $data['Nama_Penyewa'];
+                    $nomorhandphone = $data['Nomor_Handphone'];
+                    $alamatrumah = $data['Alamat_Rumah'];
+                    $nik = $data['NIK'];
+                    $tanggalmasuk = $data['Tanggal_Masuk'];
+                    $idp = $data['ID_Penyewa'];
+                    $nomorkamar = "Kamar ".$data['No_Kamar'];
+                ?>
+                    <tr>
+                        <td><?php echo $idpenyewa?></td>s
+                        <td><?php echo $namapenyewa?></td>
+                        <td><?php echo $nomorhandphone?></td>
+                        <td><?php echo $alamatrumah?></td>
+                        <td><?php echo $nik?></td>
+                        <td><?php echo $nomorkamar?></td>
+                        <td><?php echo $tanggalmasuk?></td>
+                    </tr>
+                <?php
+                }
+                ?>
+                </tbody>
+            </table>     
+    </div>
 </div>
 	
 <script>

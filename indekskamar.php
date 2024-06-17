@@ -49,12 +49,12 @@
                         <?php
                         $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_kamar");
                         while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
-                            $idkamar= $data['ID_Kamar'];
-                            $nomorkamar = $data['No_Kamar'];
-                            $jeniskamar = $data['Jenis_Kamar'];
-                            $jumlahfasilitas = $data['Jumlah_Fasilitas'];
-                            $biaya = $data['Biaya'];
-                            $status = $data['Status'];
+                            $idkamar= $data['idKamar'];
+                            $nomorkamar = $data['noKamar'];
+                            $jeniskamar = $data['jenisKamar'];
+                            $jumlahfasilitas = $data['jumlahFasilitas'];
+                            $biaya = $data['biaya'];
+                            $status = $data['status'];
                         ?>
                             <tr>
                                 <td><?=$idkamar?></td>

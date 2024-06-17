@@ -6,6 +6,6 @@
         $passwordadmin=$_POST['password'];
         $lvladmin=$_POST['statusadmin'];
         
-        $updateadmin = mysqli_query($conn, "update login set Nama_Admin = '$namaadmin', Email = '$emailadmin', Password = '$passwordadmin', lvl = '$lvladmin' where ID_Admin = '$idadmin'");
+        $updateadmin = mysqli_query($conn, "update login set namaAdmin = '$namaadmin', email = '$emailadmin', password = '$passwordadmin', lvl = '$lvladmin' where idAdmin = '$idadmin'");
     }
 ?>

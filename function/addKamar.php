@@ -2,7 +2,7 @@
 //menambah data kamar baru
 if(isset($_POST['addnewkamar'])){
     
-    $querykamar = mysqli_query($conn, "SELECT max(ID_Kamar) as id_terbesar FROM data_kamar");
+    $querykamar = mysqli_query($conn, "SELECT max(idKamar) as id_terbesar FROM data_kamar");
     $datakamar = mysqli_fetch_array($querykamar);
     $kodekamar = $datakamar['id_terbesar'];
     $urutan = (int) substr($kodekamar, 2, 4);
@@ -19,6 +19,6 @@ if(isset($_POST['addnewkamar'])){
     $jumlah_fasilitas = $_POST['jumlah_fasilitas'];
     $biaya = $_POST['biaya'];
 
-    $addtotable = mysqli_query($conn, "insert into data_kamar (ID_Kamar, No_Kamar, Jenis_Kamar, Jumlah_Fasilitas, Biaya, Status) values('$idkamar', '$nomor_kamar', '$jenis_kamar', '$jumlah_fasilitas', '$biaya', 'Kosong')");
+    $addtotable = mysqli_query($conn, "insert into data_kamar (idKamar, noKamar, jenisKamar, jumlahFasilitas, biaya, status) values('$idkamar', '$nomor_kamar', '$jenis_kamar', '$jumlah_fasilitas', '$biaya', 'Kosong')");
 }
 ?>

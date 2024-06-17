@@ -28,18 +28,15 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-info text-white mb-4">
                     <div class="card-body">
+                    <label>Kamar yang tersedia saat ini</label>
                         <?php
-                        $ambilkamar=mysqli_query($conn, "SELECT * from data_kamar");
-                        $cekkamar=mysqli_num_rows($ambilkamar);
                         $ambilkosong=mysqli_query($conn, "SELECT * from data_kamar where status='Kosong'");
                         $cekkosong=mysqli_num_rows($ambilkosong);
                         
                         if($cekkosong>0){
                         ?>
-                        <label>Kamar yang tersedia saat ini</label>
                         <h3><?=$cekkosong;?> kamar kosong</h3>
                         <?php }else{ ?>
-                        <label>Kamar yang tersedia saat ini</label>
                         <h3>Penuh!</h3>
                         <?php } ?>
                         
@@ -54,9 +51,8 @@
                 <div class="card bg-success text-white mb-4">
                     <div class="card-body">
                         <?php
-                        $tgl_skr = ('Y/m/d');
-                        $angkatgl_skr = date('m', strtotime($tgl_skr));
-                        $ambillunas=mysqli_query($conn, "SELECT * from data_transaksi where Keterangan = 'Lunas' And Month(jatuh_tempo) <= $angkatgl_skr");
+                        $tgl_skr = date('y/m/d');
+                        $ambillunas=mysqli_query($conn, "SELECT * from data_transaksi where keterangan = 'Lunas' and month(jatuhTempo) = month('$tgl_skr')");
                         $ceklunas=mysqli_num_rows($ambillunas);
                         ?>
                         <label>Tagihan yang telah lunas bulan ini</label>
@@ -72,9 +68,8 @@
                 <div class="card bg-danger text-white mb-4">
                     <div class="card-body">
                         <?php
-                        $tgl_skr = ('Y/m/d');
-                        $angkatgl_skr = date('m', strtotime($tgl_skr));
-                        $ambilbb=mysqli_query($conn, "SELECT * from data_transaksi where Keterangan != 'Lunas' And Month(jatuh_tempo) = $angkatgl_skr");
+                        $tgl_skr = date('Y/m/d');
+                        $ambilbb=mysqli_query($conn, "SELECT * from data_transaksi where keterangan != 'Lunas' And month(jatuhTempo) = month('$tgl_skr')");
                         $cekbb=mysqli_num_rows($ambilbb);
                         ?>
                         <label>Tagihan belum bayar dan cicil bulan ini</label>

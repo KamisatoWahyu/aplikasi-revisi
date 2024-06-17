@@ -1,8 +1,7 @@
 <?php
-$emailadmin = $_SESSION['username'];
-$ambiladmin = mysqli_query($conn, "SELECT lvl, Nama_Admin as namaadmin FROM login Where Email = '$emailadmin'");
+$username = $_SESSION['username'];
+$ambiladmin = mysqli_query($conn, "SELECT lvl, namaAdmin FROM login Where namaAdmin = '$username'");
 $namaadmin = mysqli_fetch_array($ambiladmin);
-$ambilnamanya = $namaadmin['namaadmin'];
+$ambilnamanya = $namaadmin['namaAdmin'];
 $lvladmin = $namaadmin['lvl'];
-
 ?>

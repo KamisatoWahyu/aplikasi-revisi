@@ -39,14 +39,16 @@
 
                         <?php
                         
-                        $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_penyewa, data_kamar where data_kamar.ID_Kamar = data_penyewa.ID_Kamar");
+                        $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_penyewa p
+                        inner join data_kamar k 
+                        on p.idKamar = k.idKamar");
                         while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
-                            $idpenyewa = $data['ID_Penyewa'];
-                            $namapenyewa = $data['Nama_Penyewa'];
-                            $nomorhandphone = $data['Nomor_Handphone'];
-                            $alamatrumah = $data['Alamat_Rumah'];
-                            $tanggalmasuk = $data['Tanggal_Masuk'];
-                            $nomorkamarnya = $data['No_Kamar'];
+                            $idpenyewa = $data['idPenyewa'];
+                            $namapenyewa = $data['namaPenyewa'];
+                            $nomorhandphone = $data['nomorHandphone'];
+                            $alamatrumah = $data['alamatRumah'];
+                            $tanggalmasuk = $data['tanggalMasuk'];
+                            $nomorkamarnya = $data['noKamar'];
                                  
                         ?>
                             <tr>
@@ -96,8 +98,8 @@
                                                         
                                                         $ambildata = mysqli_query($conn, "SELECT * from data_kamar");
                                                         while($fetcharray = mysqli_fetch_array($ambildata)){
-                                                            $nomorkamar = $fetcharray['No_Kamar'];
-                                                            $idkamar = $fetcharray['ID_Kamar'];
+                                                            $nomorkamar = $fetcharray['noKamar'];
+                                                            $idkamar = $fetcharray['idKamar'];
                                                     ?>
                                                         <option value = "<?=$idkamar;?>">Kamar <?=$nomorkamar;?></option>        
                                                     <?php   
@@ -176,9 +178,9 @@
         <form method="post">
             <div class="modal-body">
                 <?php
-                            $cekkamar = mysqli_query($conn, "SELECT * from data_kamar where status = 'Kosong'");
-                            $jumlahkamarkosong = mysqli_num_rows($cekkamar);
-                            if($jumlahkamarkosong>0){
+                    $cekkamar = mysqli_query($conn, "SELECT * from data_kamar where status = 'Kosong'");
+                    $jumlahkamarkosong = mysqli_num_rows($cekkamar);
+                    if($jumlahkamarkosong>0){
                 ?>
                 <input type="text" name="nama_penyewa" placeholder="Nama Penyewa" class="form-control" required>
                 <br>
@@ -193,8 +195,8 @@
                             
                             $ambildata = mysqli_query($conn, "SELECT * from data_kamar where status = 'Kosong'");
                             while($fetcharray = mysqli_fetch_array($ambildata)){
-                                $nomorkamar = $fetcharray['No_Kamar'];
-                                $idkamar = $fetcharray['ID_Kamar'];
+                                $nomorkamar = $fetcharray['noKamar'];
+                                $idkamar = $fetcharray['idKamar'];
                         ?>
                             <option value = "<?=$idkamar;?>">Kamar <?=$nomorkamar;?></option>        
                         <?php   

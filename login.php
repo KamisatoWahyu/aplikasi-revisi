@@ -3,17 +3,17 @@ require 'config.php';
 
 //cek login masuk apo idak
 if(isset($_POST['login'])){
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
     //mencocoki database, samo apo idak datanyo
-    $cekdatabase = mysqli_query($conn, "SELECT * FROM login where email ='$email' and password='$password'");
+    $cekdatabase = mysqli_query($conn, "SELECT * FROM login where namaAdmin ='$username' and password='$password'");
     //ngitung jumlah data
     $hitung = mysqli_num_rows($cekdatabase);
     if($hitung>0){
         
         $_SESSION['log'] = 'True';
-        $_SESSION['username'] = $email;
+        $_SESSION['username'] = $username;
         header('location:index.php');
     } else{
         header('location:login.php');
@@ -53,8 +53,8 @@ if(!isset($_SESSION['log'])){
                                     <div class="card-body">
                                         <form method="post">
                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputemail">Email</label>
-                                                <input class="form-control py-4" name="email" id="inputEmail" type="email" placeholder="Masukkan Email"> </input>
+                                                <label class="small mb-1" for="inputemail">Username</label>
+                                                <input class="form-control py-4" name="username" id="inputEmail"  placeholder="Masukkan Username"> </input>
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputPassword">Password</label>

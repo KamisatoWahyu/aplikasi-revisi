@@ -38,16 +38,21 @@ require '../cek.php';
         </thead>
         <tbody>
         <?php
-        $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_transaksi, login, data_kamar, data_penyewa, tagihan where login.ID_Admin = data_transaksi.ID_admin AND data_penyewa.ID_Penyewa = data_transaksi.ID_Penyewa AND data_kamar.ID_Kamar = data_penyewa.ID_Kamar AND tagihan.ID_Tagihan = data_transaksi.ID_Tagihan");
+        $ambilsemuadatapenyewa = mysqli_query($conn, "select * from data_transaksi tr
+        inner join login l on tr.idAdmin = l.idAdmin
+        inner join data_penyewa p on tr.idPenyewa = p.idPenyewa
+        inner join data_kamar k on p.idKamar = k.idKamar
+        inner join data_rekaman r on tr.idPembayaran = r.idPembayaran
+        ");
         while($data=mysqli_fetch_array($ambilsemuadatapenyewa)){
             
-            $namapenyewa = $data['Nama_Penyewa'];
-            $tanggaltransaksi = $data['Tanggal_Bayar'];
-            $biaya = $data['Biaya'];
-            $sisatagihan = $data['sisatagihan'];
-            $keterangan = $data['Keterangan'];
-            $namaadmin = $data['Nama_Admin'];
-            $jatuhtempo = $data['jatuh_tempo'];
+            $namapenyewa = $data['namaPenyewa'];
+            $tanggaltransaksi = $data['waktuTransaksi'];
+            $biaya = $data['biaya'];
+            $sisatagihan = $data['sisaTagihan'];
+            $keterangan = $data['keterangan'];
+            $namaadmin = $data['namaAdmin'];
+            $jatuhtempo = $data['jatuhTempo'];
         ?>
             <tr>
                 <td><?php echo $namaadmin?></td>

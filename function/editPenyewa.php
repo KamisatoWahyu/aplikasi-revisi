@@ -8,7 +8,7 @@ if(isset($_POST['updatepenyewa'])){
     $tanggalmasuk = $_POST['tanggal_masuk'];
     $jatuhtempo = date('y/m/d', strtotime('+1 months', strtotime($tanggalmasuk)));
 
-    $update = mysqli_query($conn, "update data_penyewa set Nama_Penyewa = '$namapenyewa', Nomor_Handphone = '$nomorhandphone', Alamat_Rumah = '$alamatrumah', Tanggal_Masuk = '$tanggalmasuk' where ID_Penyewa = '$idpenyewa'");
-    $updatejatuhtempo = mysqli_query($conn, "update tagihan set jatuh_tempo = '$jatuhtempo' where ID_Penyewa = '$idpenyewa'");
+    $update = mysqli_query($conn, "update data_penyewa set namaPenyewa = '$namapenyewa', nomorHandphone = '$nomorhandphone', alamatRumah = '$alamatrumah', tanggalMasuk = '$tanggalmasuk' where idPenyewa = '$idpenyewa'");
+    $updatejatuhtempo = mysqli_query($conn, "update tagihan set jatuhTempo = '$jatuhtempo' where idPenyewa = '$idpenyewa'");
 }
 ?>

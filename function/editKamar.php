@@ -8,6 +8,6 @@ if(isset($_POST['updatekamar'])){
     $biaya = $_POST['biaya'];
 
     
-    $update = mysqli_query($conn, "update data_kamar set No_Kamar = '$nomorkamar', Jenis_Kamar = '$jeniskamar', Jumlah_Fasilitas = '$jumlahfasilitas', biaya = '$biaya' where ID_Kamar = '$idkamar'");
+    $update = mysqli_query($conn, "update data_kamar set noKamar = '$nomorkamar', jenisKamar = '$jeniskamar', jumlahFasilitas = '$jumlahfasilitas', biaya = '$biaya' where idKamar = '$idkamar'");
 }
 ?>

@@ -1,12 +1,12 @@
 <?php
 //menambah penyewa  baru
 if(isset($_POST['addnewpenyewa'])){
-    $emailadmin = $_SESSION['username'];
-    $ambiladmin = mysqli_query($conn, "SELECT ID_Admin as idadmin FROM login Where Email = '$emailadmin'");
+    $username = $_SESSION['username'];
+    $ambiladmin = mysqli_query($conn, "SELECT idAdmin FROM login Where namaAdmin = '$username'");
     $idadmin = mysqli_fetch_array($ambiladmin);
-    $ambilidadmin = $idadmin['idadmin'];
+    $ambilidadmin = $idadmin['idAdmin'];
     //tutorial dari malasngoding.com__Membuat Kode Otomatis Dengan PHP dan MySQLi hehe akhirnya
-    $querypenyewa = mysqli_query($conn, "SELECT max(ID_Penyewa) as id_terbesar FROM data_penyewa");
+    $querypenyewa = mysqli_query($conn, "SELECT max(idPenyewa) as id_terbesar FROM data_penyewa");
     $datapenyewa = mysqli_fetch_array($querypenyewa);
     $kodepenyewa = $datapenyewa['id_terbesar'];
  
@@ -31,11 +31,11 @@ if(isset($_POST['addnewpenyewa'])){
     $idkamar = $_POST['kamarnya'];
 
     //menambah data ke data_penyewa
-    $addtotable = mysqli_query($conn, "insert into data_penyewa (ID_Penyewa, ID_Kamar, Nama_Penyewa, Nomor_Handphone, Alamat_Rumah, NIK, Tanggal_Masuk) 
+    $addtotable = mysqli_query($conn, "insert into data_penyewa (idPenyewa, idKamar, namaPenyewa, nomorHandphone,alamatRumah, NIK, tanggalMasuk) 
     values('$idpenyewa', '$idkamar', '$nama_penyewa', '$nomor_handphone','$alamat_rumah', '$nik', '$tanggal_masuk')");
 
     //mengubah status kamar menjadi penuh
-    $updatestatuskamar = mysqli_query($conn, "update data_kamar set Status= 'Penuh' where ID_Kamar = '$idkamar'");
+    $updatestatuskamar = mysqli_query($conn, "update data_kamar set status= 'Penuh' where idKamar = '$idkamar'");
     
     // $querytagihan = mysqli_query($conn, "SELECT max(ID_Tagihan) as id_terbesar FROM tagihan");
     //menambah langsung tagihan baru
@@ -51,7 +51,7 @@ if(isset($_POST['addnewpenyewa'])){
     $tgltagih = date("Y-m-d H:i:s");
 
     //menambah transaksi baru
-    $querypembayaran = mysqli_query($conn, "SELECT max(ID_Pembayaran) as id_terbesar FROM data_transaksi");
+    $querypembayaran = mysqli_query($conn, "SELECT max(idPembayaran) as id_terbesar FROM data_transaksi");
     $datapembayaran = mysqli_fetch_array($querypembayaran);
     $kodepembayaran = $datapembayaran['id_terbesar'];
     $urutan = (int) substr($kodepembayaran, 3, 7);
@@ -59,10 +59,10 @@ if(isset($_POST['addnewpenyewa'])){
     $hurufpembayaran = "TR";
     $idpembayaran = $hurufpembayaran. sprintf("%05s", $urutan);
     
-    $cekbiaya = mysqli_query($conn, " SELECT * from data_kamar where ID_Kamar = '$idkamar'");
+    $cekbiaya = mysqli_query($conn, " SELECT * from data_kamar where idKamar = '$idkamar'");
     $ambilbiaya = mysqli_fetch_array($cekbiaya);
-    $biaya = $ambilbiaya['Biaya'];
-    $addtotabletransaksi = mysqli_query($conn, "insert into data_transaksi(ID_Pembayaran, ID_Admin, ID_Penyewa, sisatagihan, Keterangan, tanggaltagih, jatuh_tempo) 
+    $biaya = $ambilbiaya['biaya'];
+    $addtotabletransaksi = mysqli_query($conn, "insert into data_transaksi(idPembayaran, idAdmin, idPenyewa, sisaTagihan, keterangan, tanggalTagih, jatuhTempo) 
     values('$idpembayaran', '$ambilidadmin', '$idpenyewa', '$biaya', 'Belum Bayar', '$tgltagih', '$jatuhtempo')");
 }
 ?>
