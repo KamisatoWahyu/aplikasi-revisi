@@ -8,7 +8,6 @@
 
 <main>
     <div class="container-fluid">
-
         <?php
             $ambillaporan=mysqli_query($conn,"SELECT * from data_kamar where status='Kosong'");
             $ceklaporan=mysqli_num_rows($ambillaporan);

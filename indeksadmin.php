@@ -7,7 +7,7 @@
 ?>
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Data Admin</h1>
+        <h1 class="mt-4">Kelola User</h1>
         <div class="card mb-4">
             <div class="card-header">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -21,7 +21,6 @@
                             <tr>
                                 <th>ID Admin</th>
                                 <th>Nama Admin</th>
-                                <th>Email</th>
                                 <th>Password</th>
                                 <th>Status Level</th>
                                 <th>Aksi</th>
@@ -34,14 +33,12 @@
                         while($data=mysqli_fetch_array($ambilsemuadataadmin)){
                             $idadmin= $data['idAdmin'];
                             $nama_admin = $data['username'];
-                            $email = $data['email'];
                             $password = $data['password'];
                             $lvl = $data['lvl'];
                         ?>
                             <tr>
                                 <td><?=$idadmin?></td>
                                 <td><?=$nama_admin?></td>
-                                <td><?=$email?></td>
                                 <td><?=$password?></td>
                                 <td><?=$lvl?></td>
                                 <td>
@@ -74,8 +71,6 @@
                                             <label>Nama Admin</label>
                                             <input type="text" name="namaadmin" value="<?=$nama_admin;?>" class="form-control" required>
                                             <br>
-                                            <label>Email</label>
-                                            <input type="text" name="emailadmin" value="<?=$email;?>" class="form-control"required>
                                             <br>
                                             <label>Password</label>
                                             <input type="text" name="password" value="<?=$password;?>" class="form-control" required>
@@ -149,8 +144,6 @@
                 <label>Nama Admin</label>
                 <input type="text" name="namaadmin" placeholder="Nama Admin" class="form-control" required>
                 <br>
-                <label>Email</label>
-                <input type="text" name="emailadmin" placeholder="Email" class="form-control"required>
                 <br>
                 <label>Password</label>
                 <input type="text" name="password" placeholder="Password" class="form-control" required>

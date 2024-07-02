@@ -1,12 +1,12 @@
 <?php
 require 'config.php';
 
-//cek login masuk apo idak
+//cek login
 if(isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    //mencocoki database, samo apo idak datanyo
+    //mencocoki database
     $cekdatabase = mysqli_query($conn, "SELECT * FROM login where username ='$username' and password='$password'");
     //ngitung jumlah data
     $hitung = mysqli_num_rows($cekdatabase);
@@ -53,8 +53,8 @@ if(!isset($_SESSION['log'])){
                                     <div class="card-body">
                                         <form method="post">
                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputemail">Username</label>
-                                                <input class="form-control py-4" name="username" id="inputEmail"  placeholder="Masukkan Username"> </input>
+                                                <label class="small mb-1" for="inputUsername">Username</label>
+                                                <input class="form-control py-4" name="username" id="inputUsername"  placeholder="Masukkan Username"> </input>
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputPassword">Password</label>

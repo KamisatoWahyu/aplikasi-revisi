@@ -56,7 +56,7 @@ require 'admin.php';
                             <?php if($lvladmin=='owner'){ ?>
                             <a class="nav-link" href="indeksadmin.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Kelola Kos
+                                Kelola User
                             </a>
                             <?php } ?>
                             <a class="nav-link" data-toggle="modal" data-target="#logoutmodal">

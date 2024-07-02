@@ -11,9 +11,8 @@ if(isset($_POST['addnewadmin'])){
     $idadmin = $hurufadmin. sprintf("%03s", $urutan);
     
     $namaadmin=$_POST['namaadmin'];
-    $emailadmin=$_POST['emailadmin'];
     $passwordadmin=$_POST['password'];
     $lvladmin=$_POST['statusadmin'];
-    $addtotableadmin = mysqli_query($conn, "insert into login (idAdmin, username, email, password, lvl) values('$idadmin', '$namaadmin', '$emailadmin', '$passwordadmin', '$lvladmin')");
+    $addtotableadmin = mysqli_query($conn, "insert into login (idAdmin, username, password, lvl) values('$idadmin', '$namaadmin', '$passwordadmin', '$lvladmin')");
 }
 ?>
